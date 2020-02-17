@@ -1,0 +1,7 @@
+.cpcache
+.nrepl-port
+target
+repl
+scratch.clj
+resources/public/dev
+.shadow-cljs
