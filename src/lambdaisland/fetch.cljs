@@ -55,71 +55,70 @@
   (delay (transit/writer :json)))
 
 (def transit-json-reader
-  (delay (transit/reader :json
-                         {:handlers {:f (fn [v] (js/parseFloat v))}})))
+  (delay (transit/reader :json)))
 
-(defmulti encode-body (fn [content-type body] content-type))
+(defmulti encode-body (fn [content-type body opts] content-type))
 
-(defmethod encode-body :default [_ body]
+(defmethod encode-body :default [_ body opts]
   body)
 
-(defmethod encode-body :transit-json [_ body]
-  (transit/write @transit-json-writer body))
+(defmethod encode-body :transit-json [_ body opts]
+  (transit/write (:transit-writer opts @transit-json-writer) body))
 
-(defmethod encode-body :json [_ body]
+(defmethod encode-body :json [_ body opts]
   (js/JSON.stringify (clj->js body)))
 
-(defmulti decode-body (fn [content-type bodyp] content-type))
+(defmulti decode-body (fn [content-type bodyp opts] content-type))
 
-(defmethod decode-body :default [_ bodyp]
+(defmethod decode-body :default [_ bodyp opts]
   (p/let [body bodyp]
     (j/call bodyp :text)))
 
-(defmethod decode-body :transit-json [_ bodyp]
+(defmethod decode-body :transit-json [_ bodyp opts]
   (p/let [text (j/call bodyp :text)]
-    (transit/read @transit-json-reader text)))
+    (transit/read (:transit-reader opts @transit-json-reader) text)))
 
-(defmethod decode-body :json [_ bodyp]
+(defmethod decode-body :json [_ bodyp opts]
   (p/let [body bodyp]
     (j/call bodyp :json)))
 
 (defn fetch-opts [{:keys [method accept content-type query-params body]
-                   :or {method :get
-                        accept :transit-json
-                        content-type :transit-json}}]
-  #js {:method (str/upper-case (name method))
-       :headers #js {"Accept" (c/get content-types accept)
-                     "Content-Type" (c/get content-types content-type)}
+                   :or   {method       :get
+                          accept       :transit-json
+                          content-type :transit-json}}]
+  #js {:method   (str/upper-case (name method))
+       :headers  #js {"Accept"       (c/get content-types accept)
+                      "Content-Type" (c/get content-types content-type)}
        :redirect "follow"})
 
 (defn request [url & [{:keys [method accept content-type query-params body]
-                       :as opts
-                       :or {accept :transit-json
-                            content-type :transit-json}}]]
-  (let [url (-> url
-                uri/uri
-                (assoc :query (query-str query-params))
-                uri-normalize/normalize
-                str)
+                       :as   opts
+                       :or   {accept       :transit-json
+                              content-type :transit-json}}]]
+  (let [url     (-> url
+                    uri/uri
+                    (assoc :query (query-str query-params))
+                    uri-normalize/normalize
+                    str)
         request (fetch-opts opts)]
     (when body
-      (j/assoc! request :body (encode-body body content-type)))
+      (j/assoc! request :body (encode-body content-type body opts)))
     (p/let [response (js/fetch url request)]
       (p/try
-        (let [headers (j/get response :headers)
-              header-map (into {} (map vec) (es6-iterator-seq (j/call headers :entries)))
+        (let [headers             (j/get response :headers)
+              header-map          (into {} (map vec) (es6-iterator-seq (j/call headers :entries)))
               content-type-header (j/call headers :get "Content-Type")
-              content-type (when content-type-header
-                             (c/get (set/map-invert content-types)
-                                    (str/replace content-type-header #";.*" "")))]
-          (p/let [body (decode-body content-type response)]
-            ^{::request (j/assoc! request :url url)
+              content-type        (when content-type-header
+                                    (c/get (set/map-invert content-types)
+                                           (str/replace content-type-header #";.*" "")))]
+          (p/let [body (decode-body content-type response opts)]
+            ^{::request  (j/assoc! request :url url)
               ::response response}
-            {:status (j/get response :status)
+            {:status  (j/get response :status)
              :headers header-map
-             :body body}))
+             :body    body}))
         (p/catch :default e
-          ^{::request (j/assoc! request :url url)
+          ^{::request  (j/assoc! request :url url)
             ::response response}
           {:error e})))))
 
@@ -137,6 +136,7 @@
 (defn head [url & [opts]]
   (request url (assoc opts :method :head)))
 
+
 (comment
   (p/let [result (get "/as400/paginated/VSBSTAMDTA.STOVKP"
                       {:query-params {:page 1
@@ -146,6 +146,5 @@
   (p/let [body (:body xxx)]
     (def body body))
 
-  (p/let [res (head "/as400/paginated/VSBSTAMDTA.STOVKP")
-          ]
+  (p/let [res (head "/as400/paginated/VSBSTAMDTA.STOVKP")]
     (def xxx res)))
