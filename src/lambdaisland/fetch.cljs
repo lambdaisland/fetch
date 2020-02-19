@@ -63,7 +63,7 @@
   body)
 
 (defmethod encode-body :transit-json [_ body opts]
-  (transit/write (:transit-writer opts @transit-json-writer) body))
+  (transit/write (:transit-json-writer opts @transit-json-writer) body))
 
 (defmethod encode-body :json [_ body opts]
   (js/JSON.stringify (clj->js body)))
@@ -76,7 +76,7 @@
 
 (defmethod decode-body :transit-json [_ bodyp opts]
   (p/let [text (j/call bodyp :text)]
-    (transit/read (:transit-reader opts @transit-json-reader) text)))
+    (transit/read (:transit-json-reader opts #_@transit-json-reader) text)))
 
 (defmethod decode-body :json [_ bodyp opts]
   (p/let [body bodyp]
