@@ -6,7 +6,7 @@
 
 ClojureScript wrapper around the JavaScript fetch API.
 
-```
+``` clojure
 (require '[lambdaisland.fetch :as fetch])
 
 (fetch/get "/foo.json")
