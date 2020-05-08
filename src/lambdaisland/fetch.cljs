@@ -76,7 +76,7 @@
 
 (defmethod decode-body :transit-json [_ bodyp opts]
   (p/let [text (j/call bodyp :text)]
-    (transit/read (:transit-json-reader opts #_@transit-json-reader) text)))
+    (transit/read (:transit-json-reader opts @transit-json-reader) text)))
 
 (defmethod decode-body :json [_ bodyp opts]
   (p/let [body bodyp]
