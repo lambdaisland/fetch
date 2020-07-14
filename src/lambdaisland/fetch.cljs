@@ -76,7 +76,10 @@
 
 (defmethod decode-body :transit-json [_ bodyp opts]
   (p/let [text (j/call bodyp :text)]
-    (transit/read (:transit-json-reader opts @transit-json-reader) text)))
+    (let [decoded (transit/read (:transit-json-reader opts @transit-json-reader) text)]
+      (if (satisfies? IWithMeta decoded)
+        (vary-meta decoded assoc ::raw text)
+        decoded))))
 
 (defmethod decode-body :json [_ bodyp opts]
   (p/let [body bodyp]
@@ -100,9 +103,9 @@
                     (assoc :query (query-str query-params))
                     uri-normalize/normalize
                     str)
-        request (fetch-opts opts)]
-    (when body
-      (j/assoc! request :body (encode-body content-type body opts)))
+        request (cond-> (fetch-opts opts)
+                  body
+                  (j/assoc! :body (encode-body content-type body opts)))]
     (p/let [response (js/fetch url request)]
       (p/try
         (let [headers             (j/get response :headers)
