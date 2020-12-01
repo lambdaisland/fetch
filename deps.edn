@@ -1,10 +1,10 @@
 {:paths ["src" "test" "resources"]
- :deps  {org.clojure/clojure        {:mvn/version "1.10.1"}
-         org.clojure/clojurescript  {:mvn/version "1.10.597"}
-         kitchen-async              {:mvn/version "0.1.0-SNAPSHOT"}
-         lambdaisland/uri           {:mvn/version "1.2.0"}
-         com.cognitect/transit-cljs {:mvn/version "0.8.256"}
-         appliedscience/js-interop  {:mvn/version "0.1.22"}}
+ :deps  {org.clojure/clojure         {:mvn/version "1.10.1"}
+         org.clojure/clojurescript   {:mvn/version "1.10.597"}
+         kitchen-async/kitchen-async {:mvn/version "0.1.0-SNAPSHOT"}
+         lambdaisland/uri            {:mvn/version "1.2.0"}
+         com.cognitect/transit-cljs  {:mvn/version "0.8.256"}
+         appliedscience/js-interop   {:mvn/version "0.1.22"}}
 
  :aliases
  {:dev
