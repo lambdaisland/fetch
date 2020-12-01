@@ -5,3 +5,4 @@ repl
 scratch.clj
 resources/public/dev
 .shadow-cljs
+.store
