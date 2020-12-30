@@ -30,27 +30,6 @@
    :text         "text/plain"
    :html         "text/html"})
 
-(defn query-encode [s]
-  (let [encode-char #(cond-> %
-                       (re-find #"[^a-zA-Z0-9\-\._~!\$&'\(\)\*\+,;:@\/]" %)
-                       uri-normalize/percent-encode)]
-    (->> (uri-normalize/char-seq s)
-         (map encode-char)
-         (apply str))))
-
-(defn query-str [m]
-  (when (seq m)
-    (->> m
-         (map (fn [[k v]]
-                (str (query-encode
-                      (if (string? k)
-                        k
-                        (name k)))
-                     "="
-                     (query-encode (str v)))))
-         (interpose "&")
-         (apply str))))
-
 (def transit-json-writer
   (delay (transit/writer :json)))
 
@@ -85,7 +64,7 @@
   (p/let [body bodyp]
     (j/call bodyp :json)))
 
-(defn fetch-opts [{:keys [method accept content-type query-params body]
+(defn fetch-opts [{:keys [method accept content-type]
                    :or   {method       :get
                           accept       :transit-json
                           content-type :transit-json}}]
@@ -100,8 +79,7 @@
                               content-type :transit-json}}]]
   (let [url     (-> url
                     uri/uri
-                    (assoc :query (query-str query-params))
-                    uri-normalize/normalize
+                    (assoc :query (uri/map->query-string query-params))
                     str)
         request (cond-> (fetch-opts opts)
                   body
