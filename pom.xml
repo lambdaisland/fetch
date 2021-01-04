@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>lambdaisland</groupId>
   <artifactId>fetch</artifactId>
-  <version>0.0.16</version>
+  <version>0.0.23</version>
   <name>fetch</name>
   <description>ClojureScript wrapper around the JavaScript fetch API.</description>
   <url>https://github.com/lambdaisland/fetch</url>
@@ -22,33 +22,23 @@
     <url>https://github.com/lambdaisland/fetch</url>
     <connection>scm:git:git://github.com/lambdaisland/fetch.git</connection>
     <developerConnection>scm:git:ssh://git@github.com/lambdaisland/fetch.git</developerConnection>
-    <tag>df8bf2099cc4138a420a135ef641d82a69ec6c7c</tag>
+    <tag>a3f684fe48631d2ae16968f339124b64ac6c0258</tag>
   </scm>
   <dependencies>
     <dependency>
-      <groupId>org.clojure</groupId>
-      <artifactId>clojure</artifactId>
-      <version>1.10.1</version>
-    </dependency>
-    <dependency>
       <groupId>appliedscience</groupId>
       <artifactId>js-interop</artifactId>
-      <version>0.1.22</version>
+      <version>0.2.5</version>
     </dependency>
     <dependency>
       <groupId>com.cognitect</groupId>
       <artifactId>transit-cljs</artifactId>
-      <version>0.8.256</version>
-    </dependency>
-    <dependency>
-      <groupId>org.clojure</groupId>
-      <artifactId>clojurescript</artifactId>
-      <version>1.10.597</version>
+      <version>0.8.264</version>
     </dependency>
     <dependency>
       <groupId>lambdaisland</groupId>
       <artifactId>uri</artifactId>
-      <version>1.2.0</version>
+      <version>1.4.54</version>
     </dependency>
     <dependency>
       <groupId>mhuebert</groupId>
@@ -82,7 +72,7 @@
         <configuration>
           <archive>
             <manifestEntries>
-              <git-revision>df8bf2099cc4138a420a135ef641d82a69ec6c7c</git-revision>
+              <git-revision>a3f684fe48631d2ae16968f339124b64ac6c0258</git-revision>
             </manifestEntries>
           </archive>
         </configuration>
