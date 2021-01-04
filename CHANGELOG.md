@@ -1,10 +1,13 @@
 # Unreleased
 
-## Added
-
 ## Fixed
 
+- Fix query-params encoding issue and path/query-params normalization (@den1k)
+
 ## Changed
+
+- Dependency version bumps: lambdaisland/uri, js-interop, transit-cljs
+- Remove direct dependency on Clojure/ClojureScript, people will generally bring them themselves
 
 # 0.0.16 (2020-12-01 / d5f92bd)
 
