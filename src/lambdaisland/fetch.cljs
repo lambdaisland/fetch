@@ -28,7 +28,8 @@
    :json         "application/json"
    :form-encoded "application/x-www-form-urlencoded"
    :text         "text/plain"
-   :html         "text/html"})
+   :html         "text/html"
+   :edn          "application/edn"})
 
 (def transit-json-writer
   (delay (transit/writer :json)))

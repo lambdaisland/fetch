@@ -27,6 +27,11 @@ ClojureScript wrapper around the JavaScript fetch API.
 - Returns a promise which delivers something akin to a ring response map
 - Does basic content negotiation and encoding/decoding of request/response body
 - Defaults to Transit
+- Will encode/decode transit-json, json, or EDN
+
+EDN support is opt-in, since it can increase your build size, and is not
+typically needed or wanted for a production setup. Require
+`lambdaisland.fetch.edn` to enable it.
 
 <!-- opencollective -->
 
