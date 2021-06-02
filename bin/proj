@@ -4,6 +4,7 @@
 
 (lioss/main
  {:license        :mpl
+  :group-id       "lambdaisland"
   :inception-year 2020
   :description    "ClojureScript wrapper around the JavaScript fetch API."})
 

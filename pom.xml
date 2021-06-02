@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemalocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemalocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>lambdaisland</groupId>
   <artifactId>fetch</artifactId>
-  <version>0.0.23</version>
+  <version>1.0.32</version>
   <name>fetch</name>
   <description>ClojureScript wrapper around the JavaScript fetch API.</description>
   <url>https://github.com/lambdaisland/fetch</url>
@@ -22,18 +22,13 @@
     <url>https://github.com/lambdaisland/fetch</url>
     <connection>scm:git:git://github.com/lambdaisland/fetch.git</connection>
     <developerConnection>scm:git:ssh://git@github.com/lambdaisland/fetch.git</developerConnection>
-    <tag>a3f684fe48631d2ae16968f339124b64ac6c0258</tag>
+    <tag>f89fe0dcde784627d5a1a3f6422cc1951414b572</tag>
   </scm>
   <dependencies>
     <dependency>
-      <groupId>appliedscience</groupId>
-      <artifactId>js-interop</artifactId>
-      <version>0.2.5</version>
-    </dependency>
-    <dependency>
-      <groupId>com.cognitect</groupId>
-      <artifactId>transit-cljs</artifactId>
-      <version>0.8.264</version>
+      <groupId>mhuebert</groupId>
+      <artifactId>kitchen-async</artifactId>
+      <version>0.1.0</version>
     </dependency>
     <dependency>
       <groupId>lambdaisland</groupId>
@@ -41,9 +36,14 @@
       <version>1.4.54</version>
     </dependency>
     <dependency>
-      <groupId>mhuebert</groupId>
-      <artifactId>kitchen-async</artifactId>
-      <version>0.1.0</version>
+      <groupId>com.cognitect</groupId>
+      <artifactId>transit-cljs</artifactId>
+      <version>0.8.264</version>
+    </dependency>
+    <dependency>
+      <groupId>appliedscience</groupId>
+      <artifactId>js-interop</artifactId>
+      <version>0.2.5</version>
     </dependency>
   </dependencies>
   <build>
@@ -72,7 +72,7 @@
         <configuration>
           <archive>
             <manifestEntries>
-              <git-revision>a3f684fe48631d2ae16968f339124b64ac6c0258</git-revision>
+              <git-revision>f89fe0dcde784627d5a1a3f6422cc1951414b572</git-revision>
             </manifestEntries>
           </archive>
         </configuration>

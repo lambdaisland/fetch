@@ -1,13 +1,13 @@
 {:paths ["src" "test" "resources"]
  :deps  {mhuebert/kitchen-async     {:mvn/version "0.1.0"}
-         lambdaisland/uri           {:mvn/version "1.4.54"}
-         com.cognitect/transit-cljs {:mvn/version "0.8.264"}
+         lambdaisland/uri           {:mvn/version "1.4.70"}
+         com.cognitect/transit-cljs {:mvn/version "0.8.269"}
          appliedscience/js-interop  {:mvn/version "0.2.5"}}
 
  :aliases
  {:dev
   {:extra-paths ["dev"]
-   :extra-deps  {thheller/shadow-cljs {:mvn/version "2.11.11"}}}
+   :extra-deps  {thheller/shadow-cljs {:mvn/version "2.14.2"}}}
 
   :test
   {:extra-deps {lambdaisland/kaocha      {:mvn/version "RELEASE"}
