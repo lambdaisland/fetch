@@ -2,9 +2,7 @@
 
 ## Added
 
-## Fixed
-
-## Changed
+- Added optional EDN support. Require the `lambdaisland.fetch.edn` namespace, this will register the necessary multimethods.
 
 # 0.0.23 (2021-01-04 / b8a521a)
 
