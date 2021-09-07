@@ -1,2 +1,20 @@
 #!/bin/bash
-clojure -A:test -m kaocha.runner "$@"
+
+{
+  pushd test_server
+  clj -X:run &
+  popd
+}
+
+[ -d node_modules/ws ] || npm install ws
+
+while ! nc -z localhost 9999 ; do sleep 1 ; echo -n '.' ; done
+echo
+
+clojure -A:test -M -m kaocha.runner "$@"
+
+EXIT=$?
+
+curl http://localhost:9999/exit
+
+exit $EXIT

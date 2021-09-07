@@ -1,13 +1,13 @@
 (ns lambdaisland.fetch
   (:refer-clojure :exclude [get])
-  (:require [kitchen-async.promise :as p]
+  (:require [applied-science.js-interop :as j]
             [clojure.core :as c]
-            [clojure.string :as str]
             [clojure.set :as set]
+            [clojure.string :as str]
+            [cognitect.transit :as transit]
+            [kitchen-async.promise :as p]
             [lambdaisland.uri :as uri]
-            [lambdaisland.uri.normalize :as uri-normalize]
-            [applied-science.js-interop :as j]
-            [cognitect.transit :as transit]))
+            [lambdaisland.uri.normalize :as uri-normalize]))
 
 ;; fetch(url, {
 ;;             method: 'POST', // *GET, POST, PUT, DELETE, etc.
@@ -50,29 +50,41 @@
 
 (defmulti decode-body (fn [content-type bodyp opts] content-type))
 
-(defmethod decode-body :default [_ bodyp opts]
-  (p/let [body bodyp]
-    (j/call bodyp :text)))
+(defmethod decode-body :default [_ response opts]
+  (j/call response :text))
 
-(defmethod decode-body :transit-json [_ bodyp opts]
-  (p/let [text (j/call bodyp :text)]
+(defmethod decode-body :transit-json [_ response opts]
+  (p/let [text (j/call response :text)]
     (let [decoded (transit/read (:transit-json-reader opts @transit-json-reader) text)]
       (if (satisfies? IWithMeta decoded)
         (vary-meta decoded assoc ::raw text)
         decoded))))
 
-(defmethod decode-body :json [_ bodyp opts]
-  (p/let [body bodyp]
-    (j/call bodyp :json)))
+(defmethod decode-body :json [_ response opts]
+  (j/call response :json))
 
-(defn fetch-opts [{:keys [method accept content-type]
-                   :or   {method       :get
-                          accept       :transit-json
-                          content-type :transit-json}}]
-  #js {:method   (str/upper-case (name method))
-       :headers  #js {"Accept"       (c/get content-types accept)
-                      "Content-Type" (c/get content-types content-type)}
-       :redirect "follow"})
+(defn fetch-opts [{:keys [method accept content-type
+                          headers redirect mode cache
+                          credentials referrer-policy]
+                   :or   {method          :get
+                          accept          :transit-json
+                          content-type    :transit-json
+                          redirect        :follow
+                          mode            :cors
+                          cache           :default
+                          credentials     :same-origin
+                          referrer-policy :client}}]
+  (let [fetch-headers #js {"Accept"       (c/get content-types accept)
+                           "Content-Type" (c/get content-types content-type)}]
+    (doseq [[k v] headers]
+      (j/assoc! fetch-headers k v))
+    #js {:method          (str/upper-case (name method))
+         :headers         fetch-headers
+         :redirect        (name redirect)
+         :mode            (name mode)
+         :cache           (name cache)
+         :credentials     (name credentials)
+         :referrer-policy (name referrer-policy)}))
 
 (defn request [url & [{:keys [method accept content-type query-params body]
                        :as   opts
