@@ -11,4 +11,4 @@
 
   :test
   {:extra-deps {lambdaisland/kaocha      {:mvn/version "RELEASE"}
-                com.lambdaisland/kaocha-cljs {:mvn/version "1.0.93"}}}}}
+                com.lambdaisland/kaocha-cljs {:mvn/version "1.0.113"}}}}}

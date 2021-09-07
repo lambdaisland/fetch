@@ -2,9 +2,16 @@
 
 ## Added
 
-## Fixed
+- Added support for all options that `js/fetch` understands. Option values can
+  be supplied as keyword or string. `:headers` is expected to be a Clojure map
+  from string to string: `:headers`, `:redirect`, `:mode`, `:cache`,
+  `:credentials`, `:referrer-policy`
+- There is now encoding implemented for `:content-type :form-encoded`
 
 ## Changed
+
+- Supplying a body as a string will not encode it, but use the string unchanged
+  as the body
 
 # 1.0.33 (2021-06-02 / cfb45a8)
 

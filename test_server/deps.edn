@@ -1,0 +1,5 @@
+{:paths ["."]
+ :deps {com.lambdaisland/webstuff {:git/url "https://github.com/lambdaisland/webstuff"
+                                   :git/sha "b58c3b032a3c21f41569233c34b748e0ab18d2a6"}}
+ :aliases
+ {:run {:exec-fn fetch-test-server/run-test-server}}}

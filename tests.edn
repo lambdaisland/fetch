@@ -1,4 +1,4 @@
 #kaocha/v1
-{:plugins [:kaocha.plugin/notifier
-           :kaocha.plugin/print-invocations
-           :kaocha.plugin/profiling]}
+{:plugins [:notifier :print-invocations :profiling]
+ :tests [{:type :kaocha.type/cljs
+          :cljs/repl-env cljs.repl.browser/repl-env}]}

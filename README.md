@@ -1,7 +1,7 @@
 # lambdaisland/fetch
 
 <!-- badges -->
-[![CircleCI](https://circleci.com/gh/lambdaisland/fetch.svg?style=svg)](https://circleci.com/gh/lambdaisland/fetch) [![cljdoc badge](https://cljdoc.org/badge/lambdaisland/fetch)](https://cljdoc.org/d/lambdaisland/fetch) [![Clojars Project](https://img.shields.io/clojars/v/lambdaisland/fetch.svg)](https://clojars.org/lambdaisland/fetch)
+[![cljdoc badge](https://cljdoc.org/badge/lambdaisland/fetch)](https://cljdoc.org/d/lambdaisland/fetch) [![Clojars Project](https://img.shields.io/clojars/v/lambdaisland/fetch.svg)](https://clojars.org/lambdaisland/fetch)
 <!-- /badges -->
 
 ClojureScript wrapper around the JavaScript fetch API.
@@ -33,26 +33,43 @@ EDN support is opt-in, since it can increase your build size, and is not
 typically needed or wanted for a production setup. Require
 `lambdaisland.fetch.edn` to enable it.
 
-<!-- opencollective -->
+## Options
 
-&nbsp;
+`*` = default
+
+- `:content-type`: determines the encoding of the request body and the content type header on the request. `:transit-json`, `:json`, `:edn`, `:form-encoded`, `:text`, `:html`
+- `:accept`: determines the requested encoded that the server should return.
+  Decoding is based on the content-type header in the response. Same values as
+  `:content-type`
+- `:body`: request body to be encoded. If supplied with a string it will be used as-is, otherwise it gets encoded based on `:content-type`
+
+- `:mode`: `:no-cors`, *`:cors`, `same-origin`
+- `:cache`: *`:default`, `:no-cache`, `:reload`, `:force-cache`, `:only-if-cached`
+- `:credentials` : `:include`, *`:same-origin`, `:omit`
+- `:redirect` : `:manual`, *`:follow`, `:error`
+- `:referrer-policy` : `:no-referrer`, *`:client`
+- `:headers`: map from string to string, note that the server must supply
+  `Access-Control-Allow-Headers` in a preflight response
+- `:body`: Clojure data structure to be encoded based on the `:content-type`
+
+<!-- opencollective -->
+## Lambda Island Open Source
 
 <img align="left" src="https://github.com/lambdaisland/open-source/raw/master/artwork/lighthouse_readme.png">
 
 &nbsp;
 
-## Support Lambda Island Open Source
+fetch is part of a growing collection of quality Clojure libraries created and maintained
+by the fine folks at [Gaiwan](https://gaiwan.co).
 
-fetch is part of a growing collection of quality Clojure libraries and
-tools released on the Lambda Island label. If you are using this project
-commercially then you are expected to pay it forward by
-[becoming a backer on Open Collective](http://opencollective.com/lambda-island#section-contribute),
+Pay it forward by [becoming a backer on our Open Collective](http://opencollective.com/lambda-island),
 so that we may continue to enjoy a thriving Clojure ecosystem.
 
-&nbsp;
+You can find an overview of our projects at [lambdaisland/open-source](https://github.com/lambdaisland/open-source).
 
 &nbsp;
 
+&nbsp;
 <!-- /opencollective -->
 
 <!-- contributing -->
@@ -90,7 +107,7 @@ changes are justified.
 <!-- license-mpl -->
 ## License
 
-Copyright &copy; 2020 Arne Brasseur and Contributors
+Copyright &copy; 2020-2021 Arne Brasseur and Contributors
 
 Licensed under the term of the Mozilla Public License 2.0, see LICENSE.
 <!-- /license-mpl -->
