@@ -1,7 +1,7 @@
 # lambdaisland/fetch
 
 <!-- badges -->
-[![CircleCI](https://circleci.com/gh/lambdaisland/fetch.svg?style=svg)](https://circleci.com/gh/lambdaisland/fetch) [![cljdoc badge](https://cljdoc.org/badge/lambdaisland/fetch)](https://cljdoc.org/d/lambdaisland/fetch) [![Clojars Project](https://img.shields.io/clojars/v/lambdaisland/fetch.svg)](https://clojars.org/lambdaisland/fetch)
+[![cljdoc badge](https://cljdoc.org/badge/lambdaisland/fetch)](https://cljdoc.org/d/lambdaisland/fetch) [![Clojars Project](https://img.shields.io/clojars/v/lambdaisland/fetch.svg)](https://clojars.org/lambdaisland/fetch)
 <!-- /badges -->
 
 ClojureScript wrapper around the JavaScript fetch API.
@@ -53,25 +53,23 @@ typically needed or wanted for a production setup. Require
 - `:body`: Clojure data structure to be encoded based on the `:content-type`
 
 <!-- opencollective -->
-
-&nbsp;
+## Lambda Island Open Source
 
 <img align="left" src="https://github.com/lambdaisland/open-source/raw/master/artwork/lighthouse_readme.png">
 
 &nbsp;
 
-## Support Lambda Island Open Source
+fetch is part of a growing collection of quality Clojure libraries created and maintained
+by the fine folks at [Gaiwan](https://gaiwan.co).
 
-fetch is part of a growing collection of quality Clojure libraries and
-tools released on the Lambda Island label. If you are using this project
-commercially then you are expected to pay it forward by
-[becoming a backer on Open Collective](http://opencollective.com/lambda-island#section-contribute),
+Pay it forward by [becoming a backer on our Open Collective](http://opencollective.com/lambda-island),
 so that we may continue to enjoy a thriving Clojure ecosystem.
 
-&nbsp;
+You can find an overview of our projects at [lambdaisland/open-source](https://github.com/lambdaisland/open-source).
 
 &nbsp;
 
+&nbsp;
 <!-- /opencollective -->
 
 <!-- contributing -->
@@ -109,7 +107,7 @@ changes are justified.
 <!-- license-mpl -->
 ## License
 
-Copyright &copy; 2020 Arne Brasseur and Contributors
+Copyright &copy; 2020-2021 Arne Brasseur and Contributors
 
 Licensed under the term of the Mozilla Public License 2.0, see LICENSE.
 <!-- /license-mpl -->
