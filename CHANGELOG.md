@@ -1,3 +1,11 @@
+# Unreleased
+
+## Added
+
+## Fixed
+
+## Changed
+
 # 1.0.41 (2021-09-07 / 6696b7a)
 
 ## Added
