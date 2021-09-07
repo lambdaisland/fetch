@@ -45,6 +45,9 @@
 (defmethod encode-body :transit-json [_ body opts]
   (transit/write (:transit-json-writer opts @transit-json-writer) body))
 
+(defmethod encode-body :form-encoded [_ body opts]
+  (uri/map->query-string body))
+
 (defmethod encode-body :json [_ body opts]
   (js/JSON.stringify (clj->js body)))
 
@@ -96,7 +99,9 @@
                     str)
         request (cond-> (fetch-opts opts)
                   body
-                  (j/assoc! :body (encode-body content-type body opts)))]
+                  (j/assoc! :body (if (string? body)
+                                    body
+                                    (encode-body content-type body opts))))]
     (p/let [response (js/fetch url request)]
       (p/try
         (let [headers             (j/get response :headers)

@@ -33,6 +33,25 @@ EDN support is opt-in, since it can increase your build size, and is not
 typically needed or wanted for a production setup. Require
 `lambdaisland.fetch.edn` to enable it.
 
+## Options
+
+`*` = default
+
+- `:content-type`: determines the encoding of the request body and the content type header on the request. `:transit-json`, `:json`, `:edn`, `:form-encoded`, `:text`, `:html`
+- `:accept`: determines the requested encoded that the server should return.
+  Decoding is based on the content-type header in the response. Same values as
+  `:content-type`
+- `:body`: request body to be encoded. If supplied with a string it will be used as-is, otherwise it gets encoded based on `:content-type`
+
+- `:mode`: `:no-cors`, *`:cors`, `same-origin`
+- `:cache`: *`:default`, `:no-cache`, `:reload`, `:force-cache`, `:only-if-cached`
+- `:credentials` : `:include`, *`:same-origin`, `:omit`
+- `:redirect` : `:manual`, *`:follow`, `:error`
+- `:referrer-policy` : `:no-referrer`, *`:client`
+- `:headers`: map from string to string, note that the server must supply
+  `Access-Control-Allow-Headers` in a preflight response
+- `:body`: Clojure data structure to be encoded based on the `:content-type`
+
 <!-- opencollective -->
 
 &nbsp;

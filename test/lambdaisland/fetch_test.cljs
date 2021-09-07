@@ -41,3 +41,15 @@
      (is (= "Mango chutney"
             (get-in res [:body :headers "x-extra-header"])))
      (done))))
+
+(deftest form-encoded
+  (async
+   done
+   (p/let [res (fetch/post "http://localhost:9999/echo"
+                           {:content-type :form-encoded
+                            :body {:foo [1 2 3]}})]
+     (is (= {"foo" ["1" "2" "3"]}
+            (get-in res [:body :form-params])))
+     (is (= "application/x-www-form-urlencoded"
+            (get-in res [:body :headers "content-type"])))
+     (done))))
