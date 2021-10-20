@@ -93,10 +93,9 @@
                        :as   opts
                        :or   {accept       :transit-json
                               content-type :transit-json}}]]
-  (let [url     (-> url
-                    uri/uri
-                    (assoc :query (uri/map->query-string query-params))
-                    str)
+  (let [url-record (uri/uri url)
+        url       (str (cond-> url-record
+                         (nil? (:query url-record)) (assoc :query (uri/map->query-string query-params))))
         request (cond-> (fetch-opts opts)
                   body
                   (j/assoc! :body (if (string? body)
@@ -135,8 +134,18 @@
 (defn head [url & [opts]]
   (request url (assoc opts :method :head)))
 
-
 (comment
+  ;; GET http://localhost:8007/link?hello=world&b=2
+  ;; When there is query parameters in original URI, shadow the explicit query-params.
+  (p/let [resp-link (get "http://localhost:8007/link?hello=world&b=2"
+                         {:query-params {:foo "bar"}})]
+    (def link resp-link))
+
+  ;;  GET http://localhost:8007/link?foo=bar
+  (p/let [resp-query (get "http://localhost:8007/link"
+                          {:query-params {:foo "bar"}})]
+    (def query resp-query))
+
   (p/let [result (get "/as400/paginated/VSBSTAMDTA.STOVKP"
                       {:query-params {:page 1
                                       :page-size 20}})]
