@@ -4,6 +4,8 @@
 
 ## Fixed
 
+- Fix the issue that query parameters in URL get removed unexpectedly.
+
 ## Changed
 
 # 1.0.41 (2021-09-07 / 6696b7a)
