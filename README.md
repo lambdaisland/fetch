@@ -40,6 +40,14 @@ A more typical ClojureScript example
     (prn :error e)))
 ```
 
+An example of using fetch at the REPL
+```clojure
+
+(p/let [res (fetch ...)]
+  (def res res))
+```
+After that you have your response map in `res` and you can inspect it to see what is in there.
+
 - Simply uses promises (add [kitchen-async](https://github.com/athos/kitchen-async) if you like it sweeter)
 - Returns a promise which delivers something akin to a ring response map
 - Does basic content negotiation and encoding/decoding of request/response body
