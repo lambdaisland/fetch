@@ -3,6 +3,7 @@ version: 2.1
 orbs:
   kaocha: lambdaisland/kaocha@0.0.3
   clojure: lambdaisland/clojure@0.0.7
+  browser-tools: circleci/browser-tools@1.2.3
 
 commands:
   checkout_and_run:
@@ -14,6 +15,10 @@ commands:
       - clojure/with_cache:
           cache_version: << parameters.clojure_version >>
           steps:
+            - browser-tools/install-chrome
+            - run:
+                command: google-chrome --no-first-run
+                background: true
             - run: clojure -e '(println (System/getProperty "java.runtime.name") (System/getProperty "java.runtime.version") "\nClojure" (clojure-version))'
             - run: npm install ws
             - run: ./bin/kaocha
