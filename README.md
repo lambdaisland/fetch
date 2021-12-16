@@ -72,9 +72,10 @@ A simple JSON get request.
 Same example as above but using `kitchen-async`:
 
 ``` clojure
+(require '[lambdaisland.fetch :as fetch])
 (require '[kitchen-async.promise :as p])
 
-(p/let [resp (get "https://reqres.in/api/users/2")
+(p/let [resp (fetch/get "https://reqres.in/api/users/2")
         data (-> resp
                  :body
                  (js->clj :keywordize-keys true)
