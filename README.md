@@ -58,15 +58,16 @@ A simple JSON get request.
 
 ``` clojure
 (require '[lambdaisland.fetch :as fetch])
+(require '[goog.object :as gobj])
 
 (-> (fetch/get "https://reqres.in/api/users/2")
     (.then (fn [resp]
              (-> resp
                  :body
-                 (js->clj :keywordize-keys true)
-                 :data)))
+                 ;; the actual response is a js object, not a clojure map
+                 (gobj/get "data"))))
     (.then (fn [data]
-             (js/console.log (:id data)))))
+             (js/console.log (gobj/get data "id")))))
 ```
 
 Same example as above but using `kitchen-async`:
@@ -74,13 +75,13 @@ Same example as above but using `kitchen-async`:
 ``` clojure
 (require '[lambdaisland.fetch :as fetch])
 (require '[kitchen-async.promise :as p])
+(require '[goog.object :as gobj])
 
 (p/let [resp (fetch/get "https://reqres.in/api/users/2")
         data (-> resp
                  :body
-                 (js->clj :keywordize-keys true)
-                 :data)]
-  (js/console.log (:id data)))
+                 (gobj/get "data"))]
+  (js/console.log (gobj/get data "id")))
 ```
 
 <!-- opencollective -->
