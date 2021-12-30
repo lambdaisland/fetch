@@ -52,6 +52,38 @@ typically needed or wanted for a production setup. Require
   `Access-Control-Allow-Headers` in a preflight response
 - `:body`: Clojure data structure to be encoded based on the `:content-type`
 
+## Examples
+
+A simple JSON get request.
+
+``` clojure
+(require '[lambdaisland.fetch :as fetch])
+(require '[goog.object :as gobj])
+
+(-> (fetch/get "https://reqres.in/api/users/2")
+    (.then (fn [resp]
+             (-> resp
+                 :body
+                 ;; the actual response is a js object, not a clojure map
+                 (gobj/get "data"))))
+    (.then (fn [data]
+             (js/console.log (gobj/get data "id")))))
+```
+
+Same example as above but using `kitchen-async`:
+
+``` clojure
+(require '[lambdaisland.fetch :as fetch])
+(require '[kitchen-async.promise :as p])
+(require '[goog.object :as gobj])
+
+(p/let [resp (fetch/get "https://reqres.in/api/users/2")
+        data (-> resp
+                 :body
+                 (gobj/get "data"))]
+  (js/console.log (gobj/get data "id")))
+```
+
 <!-- opencollective -->
 ## Lambda Island Open Source
 
