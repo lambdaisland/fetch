@@ -52,7 +52,7 @@ typically needed or wanted for a production setup. Require
   `Access-Control-Allow-Headers` in a preflight response
 - `:body`: Clojure data structure to be encoded based on the `:content-type`
 - `:transit-json-writer`: a custom transit writer `(t/writer :json your-opts)` if you want to add additional handlers or options
-- `:transit-json-reader`: a custom transit reader `(t/reader :json yout-opts)` 
+- `:transit-json-reader`: a custom transit reader `(t/reader :json your-opts)` 
 
 ## Examples
 
