@@ -8,7 +8,7 @@
 
 [ -d node_modules/ws ] || npm install ws
 
-#while ! nc -z localhost 9999 ; do sleep 1 ; echo -n '.' ; done
+while ! nc -z localhost 9999 ; do sleep 1 ; echo -n '.' ; done
 echo
 
 clojure -A:test -M -m kaocha.runner "$@"

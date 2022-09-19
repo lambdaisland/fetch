@@ -89,20 +89,13 @@
          :credentials     (name credentials)
          :referrer-policy (name referrer-policy)}))
 
-(defn url+query-params->url
-  "Combine the url with the query-params
-   Return a new url"
-  [url query-params]
-  (let [url-record (uri/uri url)
-        url-query-map (uri/query-map url-record)
-        query-string (uri/map->query-string (merge url-query-map query-params))]
-    (str (assoc url-record :query query-string))))
-
 (defn request [url & [{:keys [method accept content-type query-params body]
                        :as   opts
                        :or   {accept       :transit-json
                               content-type :transit-json}}]]
-  (let [url (url+query-params->url url query-params)
+  (let [url (-> (uri/uri url)
+                (uri/assoc-query* query-params)
+                str)
         request (cond-> (fetch-opts opts)
                   body
                   (j/assoc! :body (if (string? body)
@@ -140,27 +133,3 @@
 
 (defn head [url & [opts]]
   (request url (assoc opts :method :head)))
-
-(comment
-  ;; GET http://localhost:8007/link?foo=bar&hello=world&b=2
-  (p/let [resp-link (get "http://localhost:8007/link?hello=world&b=2"
-                         {:query-params {:foo "bar"}})]
-    (def link resp-link))
-
-  ;;  GET http://localhost:8007/link?foo=bar
-  (p/let [resp-query (get "http://localhost:8007/link?foo=aaa"
-                          {:query-params {:foo "bar"}})]
-    (def query resp-query))
-
-  (url+query-params->url "http://localhost:8007/link?foo=bbb" {:foo "bar" :kkk "vvv"})
-
-  (p/let [result (get "/as400/paginated/VSBSTAMDTA.STOVKP"
-                      {:query-params {:page 1
-                                      :page-size 20}})]
-    (def xxx result))
-
-  (p/let [body (:body xxx)]
-    (def body body))
-
-  (p/let [res (head "/as400/paginated/VSBSTAMDTA.STOVKP")]
-    (def xxx res)))

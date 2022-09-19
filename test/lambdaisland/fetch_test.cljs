@@ -2,7 +2,8 @@
   (:require [clojure.test :refer [deftest testing is are use-fixtures run-tests join-fixtures async]]
             [kitchen-async.promise :as p]
             [lambdaisland.fetch :as fetch]
-            [applied-science.js-interop :as j]))
+            [applied-science.js-interop :as j]
+            [clojure.pprint :as pprint]))
 
 ;; cd test_server
 ;; clj -X:run
@@ -53,3 +54,26 @@
      (is (= "application/x-www-form-urlencoded"
             (get-in res [:body :headers "content-type"])))
      (done))))
+
+(deftest add-query-params
+  (async
+   done
+   (p/then
+    (p/all
+     [(p/let [res (fetch/get "http://localhost:9999/echo?hello=world&b=2"
+                             {:query-params {:foo "bar"}})]
+        (is (= {"hello" "world", "b" "2", "foo" "bar"}
+               (get-in res [:body :params]))))
+
+      (p/let [res (fetch/get "http://localhost:9999/echo?hello=world"
+                             {:query-params {:hello "mars" :b 3}})]
+        (is (= {"hello" "mars", "b" "3"}
+               (get-in res [:body :params]))))
+
+      (p/let [res (fetch/get "http://localhost:9999/echo"
+                             {:query-params {:foo "bar"}})]
+        (is (= {"foo" "bar"} (get-in res [:body :params]))))
+
+      (p/let [res (fetch/get "http://localhost:9999/echo?x=y")]
+        (is (= {"x" "y"} (get-in res [:body :params]))))])
+    done)))

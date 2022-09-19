@@ -1,3 +1,4 @@
+;;; For more information see (info "(emacs) Directory Variables")
 ((nil . ((cider-preferred-build-tool           . clojure-cli)
          (cider-default-cljs-repl              . custom)
          (cider-custom-cljs-repl-init-form     . "(user/cljs-repl)")
