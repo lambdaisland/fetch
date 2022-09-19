@@ -2,11 +2,11 @@
 
 {
   pushd test_server
-  clj -X:run &
+  clojure -X:run &
   popd
 }
 
-[ -d node_modules/ws ] || npm install ws
+([ -d node_modules/ws ] && [ -d node_modules/node_fetch ]) || npm install ws node-fetch@2.6.1
 
 while ! nc -z localhost 9999 ; do sleep 1 ; echo -n '.' ; done
 echo
