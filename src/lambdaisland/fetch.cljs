@@ -93,10 +93,9 @@
                        :as   opts
                        :or   {accept       :transit-json
                               content-type :transit-json}}]]
-  (let [url     (-> url
-                    uri/uri
-                    (assoc :query (uri/map->query-string query-params))
-                    str)
+  (let [url (-> (uri/uri url)
+                (uri/assoc-query* query-params)
+                str)
         request (cond-> (fetch-opts opts)
                   body
                   (j/assoc! :body (if (string? body)
@@ -134,16 +133,3 @@
 
 (defn head [url & [opts]]
   (request url (assoc opts :method :head)))
-
-
-(comment
-  (p/let [result (get "/as400/paginated/VSBSTAMDTA.STOVKP"
-                      {:query-params {:page 1
-                                      :page-size 20}})]
-    (def xxx result))
-
-  (p/let [body (:body xxx)]
-    (def body body))
-
-  (p/let [res (head "/as400/paginated/VSBSTAMDTA.STOVKP")]
-    (def xxx res)))

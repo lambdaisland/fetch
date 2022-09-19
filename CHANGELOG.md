@@ -1,10 +1,9 @@
 # Unreleased
 
-## Added
-
-## Fixed
-
 ## Changed
+
+- Passed in query-params now get merged into query parameters on the URL, rather
+  than replacing them.
 
 # 1.0.41 (2021-09-07 / 6696b7a)
 

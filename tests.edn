@@ -1,4 +1,7 @@
 #kaocha/v1
 {:plugins [:notifier :print-invocations :profiling]
- :tests [{:type :kaocha.type/cljs
-          :cljs/repl-env cljs.repl.browser/repl-env}]}
+ :tests [{:id :browser
+          :type :kaocha.type/cljs
+          :cljs/repl-env cljs.repl.browser/repl-env}
+         {:id :node
+          :type :kaocha.type/cljs}]}

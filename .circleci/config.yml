@@ -1,0 +1,36 @@
+version: 2.1
+
+orbs:
+  kaocha: lambdaisland/kaocha@0.0.3
+  clojure: lambdaisland/clojure@0.0.7
+
+commands:
+  checkout_and_run:
+    parameters:
+      clojure_version:
+        type: string
+    steps:
+      - checkout
+      - clojure/with_cache:
+          cache_version: << parameters.clojure_version >>
+          steps:
+            - run: apt-get update
+            - run: 
+                command: ./bin/test_server.sh
+                background: true
+            - run: npm install ws node-fetch@2.6.1
+            - run: sleep 60
+            - run: curl http://localhost:9999/hello
+            - kaocha/execute:
+                args: "node --reporter documentation"
+                clojure_version: << parameters.clojure_version >>
+
+jobs:
+  java-11-clojure-1_10:
+    executor: clojure/openjdk17
+    steps: [{checkout_and_run: {clojure_version: "1.11.1"}}]
+
+workflows:
+  kaocha_test:
+    jobs:
+      - java-11-clojure-1_10
