@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>lambdaisland</groupId>
   <artifactId>fetch</artifactId>
-  <version>1.0.41</version>
+  <version>1.1.60</version>
   <name>fetch</name>
   <description>ClojureScript wrapper around the JavaScript fetch API.</description>
   <url>https://github.com/lambdaisland/fetch</url>
@@ -12,6 +12,9 @@
     <name>Lambda Island</name>
     <url>https://lambdaisland.com</url>
   </organization>
+  <properties>
+    <project class="build sourceEncoding">UTF-8</project>
+  </properties>
   <licenses>
     <license>
       <name>MPL-2.0</name>
@@ -22,7 +25,7 @@
     <url>https://github.com/lambdaisland/fetch</url>
     <connection>scm:git:git://github.com/lambdaisland/fetch.git</connection>
     <developerConnection>scm:git:ssh://git@github.com/lambdaisland/fetch.git</developerConnection>
-    <tag>f3d01dd3f413b7b4e079011d3b02e991cf8f2ab1</tag>
+    <tag>0d23b56c11ac92df9f655ba90f3e5a2746f47721</tag>
   </scm>
   <dependencies>
     <dependency>
@@ -33,17 +36,17 @@
     <dependency>
       <groupId>lambdaisland</groupId>
       <artifactId>uri</artifactId>
-      <version>1.4.70</version>
+      <version>1.13.95</version>
     </dependency>
     <dependency>
       <groupId>com.cognitect</groupId>
       <artifactId>transit-cljs</artifactId>
-      <version>0.8.269</version>
+      <version>0.8.280</version>
     </dependency>
     <dependency>
-      <groupId>appliedscience</groupId>
+      <groupId>applied-science</groupId>
       <artifactId>js-interop</artifactId>
-      <version>0.2.5</version>
+      <version>0.3.3</version>
     </dependency>
   </dependencies>
   <build>
@@ -64,6 +67,10 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.8.1</version>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -72,7 +79,7 @@
         <configuration>
           <archive>
             <manifestEntries>
-              <git-revision>f3d01dd3f413b7b4e079011d3b02e991cf8f2ab1</git-revision>
+              <git-revision>0d23b56c11ac92df9f655ba90f3e5a2746f47721</git-revision>
             </manifestEntries>
           </archive>
         </configuration>
