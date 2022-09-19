@@ -1,4 +1,4 @@
-# Unreleased
+# 1.1.60 (2022-09-19 / 8d42e83)
 
 ## Changed
 
