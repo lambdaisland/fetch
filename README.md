@@ -23,6 +23,31 @@ ClojureScript wrapper around the JavaScript fetch API.
    :body #js {...}}>
 ```
 
+A more typical ClojureScript example
+```clojure
+(ns fetch.demo.core
+  (:require [kitchen-async.promise :as p]
+            [lambdaisland.fetch :as fetch]))
+
+(p/try
+  (p/let [resp (fetch/get
+                "https://api.github.com/users/seisvelas/gists"
+                {:accept :json
+                 :content-type :json})]
+    (prn (:body resp)))
+  (p/catch :default e
+     ;; log your exception here
+    (prn :error e)))
+```
+
+An example of using fetch at the REPL
+```clojure
+
+(p/let [res (fetch ...)]
+  (def res res))
+```
+After that you have your response map in `res` and you can inspect it to see what is in there.
+
 - Simply uses promises (add [kitchen-async](https://github.com/athos/kitchen-async) if you like it sweeter)
 - Returns a promise which delivers something akin to a ring response map
 - Does basic content negotiation and encoding/decoding of request/response body
