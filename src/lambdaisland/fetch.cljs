@@ -67,7 +67,7 @@
   (j/call response :json))
 
 (defn fetch-opts [{:keys [method accept content-type
-                          headers redirect mode cache
+                          headers redirect mode cache signal
                           credentials referrer-policy]
                    :or   {method          :get
                           accept          :transit-json
@@ -86,6 +86,7 @@
          :redirect        (name redirect)
          :mode            (name mode)
          :cache           (name cache)
+         :signal          signal
          :credentials     (name credentials)
          :referrer-policy (name referrer-policy)}))
 
