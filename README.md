@@ -78,6 +78,7 @@ typically needed or wanted for a production setup. Require
 - `:body`: Clojure data structure to be encoded based on the `:content-type`
 - `:transit-json-writer`: a custom transit writer `(t/writer :json your-opts)` if you want to add additional handlers or options
 - `:transit-json-reader`: a custom transit reader `(t/reader :json your-opts)` 
+- `:signal`: an `AbortController`'s [`AbortSignal`](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal), allowing you to abort the operation
 
 ## Examples
 

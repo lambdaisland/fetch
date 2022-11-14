@@ -2,7 +2,7 @@
 
 ## Added
 
-## Fixed
+- Support for a `:signal` key, to hook up an `AbortController`
 
 ## Changed
 
