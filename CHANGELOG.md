@@ -1,3 +1,11 @@
+# Unreleased
+
+## Added
+
+## Fixed
+
+## Changed
+
 # 1.2.69 (2022-11-14 / 6e9a82f)
 
 ## Added
