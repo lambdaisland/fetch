@@ -67,7 +67,7 @@ typically needed or wanted for a production setup. Require
   Decoding is based on the content-type header in the response. Same values as
   `:content-type`
 - `:body`: request body to be encoded. If supplied with a string it will be used as-is, otherwise it gets encoded based on `:content-type`
-
+- `:query-params`: map of query parameters
 - `:mode`: `:no-cors`, *`:cors`, `same-origin`
 - `:cache`: *`:default`, `:no-cache`, `:reload`, `:force-cache`, `:only-if-cached`
 - `:credentials` : `:include`, *`:same-origin`, `:omit`
@@ -75,9 +75,8 @@ typically needed or wanted for a production setup. Require
 - `:referrer-policy` : `:no-referrer`, *`:client`
 - `:headers`: map from string to string, note that the server must supply
   `Access-Control-Allow-Headers` in a preflight response
-- `:body`: Clojure data structure to be encoded based on the `:content-type`
 - `:transit-json-writer`: a custom transit writer `(t/writer :json your-opts)` if you want to add additional handlers or options
-- `:transit-json-reader`: a custom transit reader `(t/reader :json your-opts)` 
+- `:transit-json-reader`: a custom transit reader `(t/reader :json your-opts)`
 - `:signal`: an `AbortController`'s [`AbortSignal`](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal), allowing you to abort the operation
 
 ## Examples
