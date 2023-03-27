@@ -1,6 +1,6 @@
 {:paths ["src" "test" "resources"]
  :deps  {mhuebert/kitchen-async     {:mvn/version "0.1.0"}
-         lambdaisland/uri           {:mvn/version "1.13.95"}
+         lambdaisland/uri           {:mvn/version "1.14.120"}
          com.cognitect/transit-cljs {:mvn/version "0.8.280"}
          applied-science/js-interop {:mvn/version "0.3.3"}}
 
