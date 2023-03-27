@@ -9,10 +9,11 @@
 # 1.3.74 (2023-03-27 / ce3b211)
 
 ## Added
+- Add documentation for :query-params. (thanks [@opqdonut](https://github.com/opqdonut))
 
 ## Fixed
 
-## Changed
+-  Bump uri library to address security issue.
 
 # 1.2.69 (2022-11-14 / 6e9a82f)
 
