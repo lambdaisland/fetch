@@ -90,7 +90,7 @@
          :credentials     (name credentials)
          :referrer-policy (name referrer-policy)}))
 
-(defn request [url & [{:keys [method accept content-type query-params body]
+(defn request [url & [{:keys [method accept content-type query-params body as]
                        :as   opts
                        :or   {accept       :transit-json
                               content-type :transit-json}}]]
@@ -107,9 +107,11 @@
         (let [headers             (j/get response :headers)
               header-map          (into {} (map vec) (es6-iterator-seq (j/call headers :entries)))
               content-type-header (j/call headers :get "Content-Type")
-              content-type        (when content-type-header
-                                    (c/get (set/map-invert content-types)
-                                           (str/replace content-type-header #";.*" "")))]
+              content-type        (if as
+                                    as
+                                    (when content-type-header
+                                      (c/get (set/map-invert content-types)
+                                             (str/replace content-type-header #";.*" ""))))]
           (p/let [body (decode-body content-type response opts)]
             ^{::request  (j/assoc! request :url url)
               ::response response}

@@ -66,6 +66,7 @@ typically needed or wanted for a production setup. Require
 - `:accept`: determines the requested encoded that the server should return.
   Decoding is based on the content-type header in the response. Same values as
   `:content-type`
+- `:as`: forces the body to be decoded as a certain content type, takes a keyword, see `:content-type`
 - `:body`: request body to be encoded. If supplied with a string it will be used as-is, otherwise it gets encoded based on `:content-type`
 - `:query-params`: map of query parameters
 - `:mode`: `:no-cors`, *`:cors`, `same-origin`
