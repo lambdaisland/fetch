@@ -4,9 +4,14 @@
 
 - `:as` flag to force response content-type parsing
 
+## Changed
+
+- Dependency version bumps
+
 # 1.3.74 (2023-03-27 / ce3b211)
 
 ## Added
+
 - Add documentation for :query-params. (thanks [@opqdonut](https://github.com/opqdonut))
 
 ## Fixed
