@@ -1,9 +1,10 @@
 (ns lambdaisland.fetch-test
-  (:require [applied-science.js-interop :as j]
-            [clojure.pprint :as pprint]
-            [clojure.test :refer [deftest testing is are use-fixtures run-tests join-fixtures async]]
-            [kitchen-async.promise :as p]
-            [lambdaisland.fetch :as fetch]))
+  (:require
+   [applied-science.js-interop :as j]
+   [clojure.pprint :as pprint]
+   [clojure.test :refer [deftest testing is are use-fixtures run-tests join-fixtures async]]
+   [kitchen-async.promise :as p]
+   [lambdaisland.fetch :as fetch]))
 
 ;; cd test_server
 ;; clj -X:run
@@ -80,3 +81,10 @@
       (p/let [res (fetch/get "http://localhost:9999/echo?x=y")]
         (is (= {"x" "y"} (get-in res [:body :params]))))])
     done)))
+
+(deftest explicit-response-type
+  (async
+   done
+   (p/let [res (fetch/get "http://localhost:9999/hello" {:accept :json :as :text})]
+     (is (= "{\"hello\":\"world\"}" (:body res)))
+     (done))))
