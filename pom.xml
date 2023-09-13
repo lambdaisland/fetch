@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>lambdaisland</groupId>
   <artifactId>fetch</artifactId>
-  <version>1.4.80</version>
+  <version>1.5.83</version>
   <name>fetch</name>
   <description>ClojureScript wrapper around the JavaScript fetch API.</description>
   <url>https://github.com/lambdaisland/fetch</url>
@@ -25,7 +25,7 @@
     <url>https://github.com/lambdaisland/fetch</url>
     <connection>scm:git:git://github.com/lambdaisland/fetch.git</connection>
     <developerConnection>scm:git:ssh://git@github.com/lambdaisland/fetch.git</developerConnection>
-    <tag>bbdd200eff5266c4ffdbb6e6df58cb1fc0494a0f</tag>
+    <tag>737e2977527b02d3221de6103474ffd547b7c9fe</tag>
   </scm>
   <dependencies>
     <dependency>
@@ -79,7 +79,7 @@
         <configuration>
           <archive>
             <manifestEntries>
-              <git-revision>bbdd200eff5266c4ffdbb6e6df58cb1fc0494a0f</git-revision>
+              <git-revision>737e2977527b02d3221de6103474ffd547b7c9fe</git-revision>
             </manifestEntries>
           </archive>
         </configuration>
