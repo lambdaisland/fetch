@@ -2,9 +2,7 @@
 
 ## Added
 
-## Fixed
-
-## Changed
+- Specify edn tag reader functions with `:edn/readers`
 
 # 1.4.80 (2023-08-30 / d352b27)
 

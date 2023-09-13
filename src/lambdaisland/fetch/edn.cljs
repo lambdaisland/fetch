@@ -12,4 +12,7 @@
 
 (defmethod fetch/decode-body :edn [_ bodyp opts]
   (p/let [text (j/call bodyp :text)]
-    (edn/read-string text)))
+    (edn/read-string (cond-> {}
+                       (:edn/readers opts)
+                       (assoc :readers (:edn/readers opts)))
+                     text)))
